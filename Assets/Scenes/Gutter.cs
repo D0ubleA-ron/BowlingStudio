@@ -10,7 +10,8 @@ public class Gutter : MonoBehaviour
         Rigidbody ballRigidBody = triggeredBody.GetComponent<Rigidbody>();
 
         //We store the velocity magnitude before resetting the velocity
-        float velocityMagnitude = ballRigidBody.linearVelocity.magnitude;
+        if (triggeredBody.CompareTag("Ball")){
+            float velocityMagnitude = ballRigidBody.linearVelocity.magnitude;
 
         //It is important to reset the linear AND angular velocity
         //This is because the ball is rotating on the ground when moving
@@ -21,5 +22,7 @@ public class Gutter : MonoBehaviour
         //We use the cached velocity magnitude to keep it a little realistic
         ballRigidBody.AddForce(transform.forward * velocityMagnitude,ForceMode.VelocityChange);
         Debug.Log("Ball has fallen into the gutter");
+        }
+        
     }
 }

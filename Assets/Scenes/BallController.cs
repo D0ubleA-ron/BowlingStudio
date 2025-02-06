@@ -20,9 +20,9 @@ public class BallController : MonoBehaviour
         // When the space key is pressed the
         // LaunchBall method will be called.
         inputManager.OnSpacePressed.AddListener(LaunchBall);
-        transform.parent = ballAnchor;
-        transform.localPosition = Vector3.zero;
-        ballRB.isKinematic = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        ResetBall();
+        
     }
 
     private void LaunchBall()
@@ -36,5 +36,17 @@ public class BallController : MonoBehaviour
         ballRB.isKinematic = false;
         ballRB.AddForce(launchIndicator.forward * force, ForceMode.Impulse);
         launchIndicator.gameObject.SetActive(false);
+    }
+
+    public void ResetBall()
+    {
+       
+        isBallLaunched = false;
+        
+        ballRB.linearVelocity = Vector3.zero;
+        transform.parent = ballAnchor;
+        transform.localPosition = Vector3.zero;
+        launchIndicator.gameObject.SetActive(true);
+        ballRB.isKinematic = true;
     }
 }
